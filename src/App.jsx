@@ -16,7 +16,7 @@ export default function App() {
           <img src="../guestbook.png" alt="guestbook" />
           <Link className={style.login} to='/'>login</Link>
         </nav>
-        <body>
+        <section className={style.body}>
           
         
           <Switch>
@@ -27,7 +27,7 @@ export default function App() {
               <Login />
             </Route>
           </Switch>
-        </body>
+        </section>
       </Router>
     </main>
   )

@@ -25,7 +25,21 @@
 
 .loginContainer p{
     margin-top: -10px;
-    color: navy;
+    color: crimson;
+}
+
+.linkTo{
+    text-decoration: none;
+}
+
+.linkTo:hover{
+    text-decoration: none;
+    color: fuchsia
+}
+
+.linkTo:active{
+    text-decoration: none;
+    color: yellow;
 }
 
 .userLogin{

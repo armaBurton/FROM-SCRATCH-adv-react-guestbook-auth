@@ -6,12 +6,20 @@ import {
 
 const GuestbookContext = createContext();
 
-export default function (){
-  const [temp, setTemp] = useState('');
+export default function GuestbookProvider({ children }){
+  const [signInOrUp, setSignInOrUp] = useState(true);
 
   const guestbookState = {
-    temp, setTemp
+    signInOrUp, setSignInOrUp,
   };
 
-  
+  return(
+    <GuestbookContext.Provider value={guestbookState}>
+      {children}
+    </GuestbookContext.Provider>
+  );
+}
+
+export function guestbookContext(){
+  return useContext(GuestbookContext);
 }
