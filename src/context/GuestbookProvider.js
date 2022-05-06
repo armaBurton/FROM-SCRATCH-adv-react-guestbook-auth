@@ -7,7 +7,7 @@ import {
 const GuestbookContext = createContext();
 
 export default function GuestbookProvider({ children }){
-  const [signInOrUp, setSignInOrUp] = useState(true);
+  const [signInOrUp, setSignInOrUp] = useState(false);
 
   const guestbookState = {
     signInOrUp, setSignInOrUp,
@@ -18,6 +18,13 @@ export default function GuestbookProvider({ children }){
       {children}
     </GuestbookContext.Provider>
   );
+}
+
+export async function ProvideAuth({ children }){
+  const [user , setUser] = useState(null);
+
+  const signUp = (email, password) => {
+  }
 }
 
 export function guestbookContext(){
