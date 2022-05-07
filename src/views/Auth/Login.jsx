@@ -1,12 +1,16 @@
 import style from './Login.css';
 import { useHistory, useLocation } from 'react-router-dom';
 import { guestbookContext } from '../../context/GuestbookProvider';
-import { signUpUser } from '../../services/user';
 import { useForm } from '../../hooks/useForm';
 
 export default function Login(){
   const {
     signInOrUp, setSignInOrUp
+  } = guestbookContext();
+  const { 
+    login, 
+    signUp,
+    user,
   } = guestbookContext();
   const history = useHistory();
   const location = useLocation();
@@ -19,15 +23,19 @@ export default function Login(){
     signInOrUp ? setSignInOrUp(false) : setSignInOrUp(true);
   }
 
-  function handleLogin(e){
+  async function handleLogin(e){
     e.preventDefault();
+
+    await login(formState.email, formState.password);
+    console.log(user);
   }
 
-  function handleSignUp(e){
+  async function handleSignUp(e){
     e.preventDefault();
-    console.log('handleSignUp');
-  }
 
+    await signUp(formState.email, formState.password);
+  }
+  
   return (
     <section className={style.loginPage}>
       <div className={style.loginContainer}>

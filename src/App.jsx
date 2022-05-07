@@ -6,16 +6,23 @@ import {
   Link
 } from 'react-router-dom';
 import style from './App.css';
-import Login from './views/Auth/Login';
 import { guestbookContext } from './context/GuestbookProvider';
+import Login from './views/Auth/Login';
 
 export default function App() {
   const {
+    user,
     setSignInOrUp,
+    logout,
   } = guestbookContext();
 
   function resetUser(){
-    setSignInOrUp(true);
+    setSignInOrUp(false);
+  }
+
+  async function handleLogout(e){
+    e.preventDefault();
+    await logout();
   }
 
   return (
@@ -23,7 +30,12 @@ export default function App() {
       <Router>
         <nav>
           <img src="../guestbook.png" alt="guestbook" />
-          <Link className={style.login} onClick={resetUser} to='/'>login</Link>
+          {
+            user.aud === 'authenticated'
+              ? <Link className={style.login} onClick={handleLogout} to='/'>logout</Link>
+              : <Link className={style.login} onClick={resetUser} to='/'>login</Link>
+          }
+          
         </nav>
         <section className={style.body}>
           <Switch>
