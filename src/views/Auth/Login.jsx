@@ -1,6 +1,7 @@
 import style from './Login.css';
 import { useHistory, useLocation } from 'react-router-dom';
 import { guestbookContext } from '../../context/GuestbookProvider';
+import { useGuestbook } from '../../context/GuestbookProvider';
 import { useForm } from '../../hooks/useForm';
 
 export default function Login(){
@@ -11,7 +12,7 @@ export default function Login(){
     login, 
     signUp,
     user,
-  } = guestbookContext();
+  } = useGuestbook();
   const history = useHistory();
   const location = useLocation();
   const { formState, handleFormChange } = useForm({email: '' , password: ''});

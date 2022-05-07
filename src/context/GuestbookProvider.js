@@ -57,6 +57,16 @@ export const GuestbookProvider = ({ children }) => {
   );
 }
 
+export const useGuestbook = () => {
+  const context = useContext(GuestbookContext);
+
+  if (context === undefined){
+    throw  new Error('useGuestbook must be used withing a GuestbookProvider')
+  }
+
+  return context;
+}
+
 export function guestbookContext(){
   return useContext(GuestbookContext);
 }
