@@ -51,9 +51,6 @@ export default function App() {
             <Route path="/login">
               {user.aud === 'authenticated' ? <Guestbook /> : <Login />}
             </Route>
-            {/* <Route path="/login">
-              <Login />
-            </Route> */}
             <PrivateRoute path="/guestbook">
               <Guestbook />
             </PrivateRoute>
@@ -69,14 +66,3 @@ export default function App() {
     </main>
   );
 }
-
-// <Route exact path="/">
-//   <Redirect to="/login" />
-// </Route>
-// <Route path="/login">
-//   {user.aud === 'authenticated' ? (
-//     <Redirect to="/guestbook" />
-//   ) : (
-//     <Login />
-//   )}
-// </Route>

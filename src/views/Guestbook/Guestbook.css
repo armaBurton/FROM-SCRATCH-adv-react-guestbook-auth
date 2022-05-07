@@ -13,6 +13,11 @@
 
 .guestbookSection textarea {
   padding: 5px;
+  border: none;
+}
+
+.guestbookSection textarea:hover {
+  box-shadow: 0 0 20px yellow;
 }
 
 .guestbookSection form {
@@ -40,4 +45,12 @@
 .guestbookSection button:active {
   background-color: orange;
   color: yellow;
+}
+
+ul {
+  margin-top: 50px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

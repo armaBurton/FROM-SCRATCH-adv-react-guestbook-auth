@@ -43,14 +43,21 @@ nav {
 .login {
   text-decoration: none;
   font-size: 1.5rem;
-  color: yellow;
+  color: fuchsia;
   font-weight: 600;
+  background-color: chartreuse;
+  width: 100px;
+  text-align: center;
+  border-radius: 5px;
+  padding-top: 5px;
 }
 
 .login:hover {
-  color: chartreuse;
+  background-color: yellow;
+  color: fuchsia;
 }
 
 .login:active {
-  color: orange;
+  color: yellow;
+  background-color: orange;
 }

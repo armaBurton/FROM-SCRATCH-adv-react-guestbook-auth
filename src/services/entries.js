@@ -5,15 +5,16 @@ export async function getEntries() {
     .from('entries')
     .select()
     .order('created_at', { ascending: false });
-  
+
   return parseData(request);
 }
 
-export async function createEntry({ userId, content }){
+export async function createEntry({ userId, content }) {
+  console.log(`|| userId, content >`, userId, content);
   const request = await client
     .from('entries')
     .insert({ guest_id: userId, content });
-  
+
   return parseData(request);
 }
 
@@ -22,6 +23,6 @@ export async function updateEntryById(id, content) {
     .from('entries')
     .update({ content })
     .match({ id });
-  
-  return parseData(request);  
+
+  return parseData(request);
 }
