@@ -1,4 +1,5 @@
-export default function Guestbook(){
+import { useEffect } from 'react';
 
+export default function Guestbook() {
   return <></>;
 }
