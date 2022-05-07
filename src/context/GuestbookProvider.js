@@ -3,15 +3,60 @@ import {
   useContext,
   useState
 } from 'react';
+import { getUser, signInUser, signUpUser, signOutUser } from '../services/user';
 
 const GuestbookContext = createContext();
 
-export default function (){
-  const [temp, setTemp] = useState('');
+export const GuestbookProvider = ({ children }) => {
+  const currentUser = getUser();
+
+  const [user, setUser] = useState(currentUser || { email: null });
+  const [signInOrUp, setSignInOrUp] = useState(false);
 
   const guestbookState = {
-    temp, setTemp
+    signInOrUp, setSignInOrUp,
   };
 
-  
+  const login = async (email, password) => {
+    console.log('hit login from GuestbookProvider', email, password)
+
+    console.log(`|| email, password >`, email, password);
+    const authenticatedUser = await signInUser({email, password});
+
+    if (authenticatedUser){
+      setUser(authenticatedUser);
+    }
+  }
+
+  const signUp = async (email, password) => {
+
+    const newUser = await signUpUser({email, password});
+
+    if (newUser) setUser(newUser);
+  }
+
+  const logout = async (email, password) => {
+    const logoutUser = await signOutUser();
+
+    setUser(logoutUser);
+  }
+
+  return(
+    <GuestbookContext.Provider value={{ 
+      guestbookState, 
+      login,
+      signUp,
+      logout, 
+      user, 
+      setUser,
+      signInOrUp, 
+      setSignInOrUp 
+    }}>
+      {children}
+    </GuestbookContext.Provider>
+  );
+}
+
+export function guestbookContext(){
+  return useContext(GuestbookContext);
 }
