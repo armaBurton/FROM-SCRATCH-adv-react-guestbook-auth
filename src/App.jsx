@@ -8,6 +8,9 @@ import {
 import style from './App.css';
 import { guestbookContext } from './context/GuestbookProvider';
 import Login from './views/Auth/Login';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Guestbook from './views/Guestbook/Guestbook';
+import Home from './views/Home/Home';
 
 export default function App() {
   const { user, setSignInOrUp, logout } = guestbookContext();
@@ -38,20 +41,26 @@ export default function App() {
         </nav>
         <section className={style.body}>
           <Switch>
-            <Route exact path="/">
-              <Redirect to="/login" />
-            </Route>
             <Route path="/login">
-              {user.aud === 'authenticated' ? (
-                <Redirect to="/guestbook" />
-              ) : (
-                <Login />
-              )}
-              {/* <Login /> */}
+              <Login />
             </Route>
+            <PrivateRoute path="/guestbook">
+              <Guestbook />
+            </PrivateRoute>
           </Switch>
         </section>
       </Router>
     </main>
   );
 }
+
+// <Route exact path="/">
+//   <Redirect to="/login" />
+// </Route>
+// <Route path="/login">
+//   {user.aud === 'authenticated' ? (
+//     <Redirect to="/guestbook" />
+//   ) : (
+//     <Login />
+//   )}
+// </Route>
