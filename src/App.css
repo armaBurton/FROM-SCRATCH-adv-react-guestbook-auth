@@ -25,6 +25,16 @@ nav {
   padding: 0 50px;
 }
 
+.navDiv {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.navDiv p {
+  color: chartreuse;
+}
+
 .main img {
   width: 50px;
   object-fit: contain;

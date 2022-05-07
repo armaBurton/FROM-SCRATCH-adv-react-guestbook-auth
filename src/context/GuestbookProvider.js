@@ -7,7 +7,7 @@ export const GuestbookProvider = ({ children }) => {
   const currentUser = getUser();
 
   const [user, setUser] = useState(currentUser || { email: null });
-  const [signInOrUp, setSignInOrUp] = useState(false);
+  const [signInOrUp, setSignInOrUp] = useState(true);
   const [loading, setLoading] = useState(true);
   const [entries, setEntries] = useState([]);
 

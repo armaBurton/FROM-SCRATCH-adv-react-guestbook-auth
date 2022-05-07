@@ -29,26 +29,39 @@ export default function App() {
       <Router>
         <nav>
           <img src="../guestbook.png" alt="guestbook" />
-          {user.aud === 'authenticated' ? (
-            <Link className={style.login} onClick={handleLogout} to="/">
-              logout
-            </Link>
-          ) : (
-            <Link className={style.login} onClick={resetUser} to="/">
-              login
-            </Link>
-          )}
+          <div className={style.navDiv}>
+            {user.aud === 'authenticated' ? (
+              <p>signed in as {user.email}</p>
+            ) : (
+              <></>
+            )}
+            {user.aud === 'authenticated' ? (
+              <Link className={style.login} onClick={handleLogout} to="/">
+                logout
+              </Link>
+            ) : (
+              <Link className={style.login} onClick={resetUser} to="/">
+                login
+              </Link>
+            )}
+          </div>
         </nav>
         <section className={style.body}>
           <Switch>
             <Route path="/login">
-              <Login />
+              {user.aud === 'authenticated' ? <Guestbook /> : <Login />}
             </Route>
+            {/* <Route path="/login">
+              <Login />
+            </Route> */}
             <PrivateRoute path="/guestbook">
               <Guestbook />
             </PrivateRoute>
-            <Route path="/">
+            <Route path="/home">
               <Home />
+            </Route>
+            <Route path="/">
+              <Redirect to="/login" />
             </Route>
           </Switch>
         </section>

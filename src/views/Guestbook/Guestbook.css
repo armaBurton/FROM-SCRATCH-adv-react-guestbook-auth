@@ -1,0 +1,43 @@
+.guestbookSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.guestbookSection h1 {
+  font-size: 3rem;
+  color: fuchsia;
+}
+
+.guestbookSection textarea {
+  padding: 5px;
+}
+
+.guestbookSection form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.guestbookSection button {
+  cursor: pointer;
+  padding: 5px 0;
+  font-size: 1.25rem;
+  background-color: fuchsia;
+  border: none;
+  color: chartreuse;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.guestbookSection button:hover {
+  background-color: yellow;
+  color: fuchsia;
+}
+
+.guestbookSection button:active {
+  background-color: orange;
+  color: yellow;
+}
