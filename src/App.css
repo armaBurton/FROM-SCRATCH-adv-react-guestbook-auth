@@ -1,19 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500;600;700;800&display=swap');
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Baloo Paaji 2', cursive;
 }
 
-.body{
+.body {
   width: 100%;
   height: 100vh;
   background-color: chartreuse;
+  padding-top: 100px;
 }
 
-nav{
+nav {
   height: 100px;
   width: 100%;
   background-color: fuchsia;
@@ -24,22 +25,22 @@ nav{
   padding: 0 50px;
 }
 
-.main img{
+.main img {
   width: 50px;
   object-fit: contain;
 }
 
-.login{
+.login {
   text-decoration: none;
   font-size: 1.5rem;
   color: yellow;
-  font-weight: 600;;
+  font-weight: 600;
 }
 
-.login:hover{
+.login:hover {
   color: chartreuse;
 }
 
-.login:active{
-  color: orange
+.login:active {
+  color: orange;
 }
