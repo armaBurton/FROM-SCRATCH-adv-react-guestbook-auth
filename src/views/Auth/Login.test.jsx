@@ -17,6 +17,7 @@ import {
   GuestbookProvider,
   useGuestbook,
 } from '../../context/GuestbookProvider';
+import { createClient } from '@supabase/supabase-js';
 import App from '../../App';
 
 jest.mock('../../services/user.js', () => {
