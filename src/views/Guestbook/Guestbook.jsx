@@ -6,7 +6,7 @@ import style from './Guestbook.css';
 
 export default function Guestbook({ children, ...rest }) {
   const { user, entries, setEntries, loading, setLoading } = useGuestbook();
-  const [textState, useTextState] = useState('');
+  const [textState, setTextState] = useState('');
   const [guestObj, setGuestObj] = useState({});
 
   useEffect(() => {
@@ -20,23 +20,29 @@ export default function Guestbook({ children, ...rest }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(user.id, textState);
 
-    const guestbookObj = {
-      userId: user.id,
-      content: textState,
-    };
+    if (textState === '') {
+      return;
+    } else {
+      console.log(user.id, textState);
 
-    await createEntry(guestbookObj);
-    await getEntries()
-      .then(setEntries)
-      .catch(console.error)
-      .finally(() => setLoading(false));
+      const guestbookObj = {
+        userId: user.id,
+        content: textState,
+      };
+
+      await createEntry(guestbookObj);
+      await getEntries()
+        .then(setEntries)
+        .catch(console.error)
+        .finally(() => setLoading(false));
+      setTextState('');
+    }
   }
 
   function handleGuesbookChange(e) {
     e.preventDefault();
-    useTextState(e.target.value);
+    setTextState(e.target.value);
   }
   console.log(user);
 
@@ -51,6 +57,7 @@ export default function Guestbook({ children, ...rest }) {
             placeholder="Please leave a message"
             cols="60"
             rows="3"
+            value={textState}
             onChange={handleGuesbookChange}
           ></textarea>
           <button type="submit">Add Entry</button>

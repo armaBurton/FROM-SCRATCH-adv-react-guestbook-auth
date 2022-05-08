@@ -11,6 +11,7 @@ import Login from './views/Auth/Login';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Guestbook from './views/Guestbook/Guestbook';
 import Home from './views/Home/Home';
+import Footer from './views/Footer/Footer';
 
 export default function App() {
   const { user, setSignInOrUp, logout } = guestbookContext();

@@ -12,6 +12,7 @@
   height: 100vh;
   background-color: chartreuse;
   padding-top: 100px;
+  padding-bottom: 50px;
 }
 
 nav {
@@ -60,4 +61,10 @@ nav {
 .login:active {
   color: yellow;
   background-color: orange;
+}
+
+footer {
+  height: 50px;
+  width: 100%;
+  background-color: fuchsia;
 }

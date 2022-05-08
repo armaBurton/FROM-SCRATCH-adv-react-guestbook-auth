@@ -31,22 +31,29 @@ export default function Login() {
     await signUp(formState.email, formState.password);
   }
 
+  console.log(user);
+
   return (
     <section className={style.loginPage}>
       <div className={style.loginContainer}>
         {signInOrUp ? (
           <>
-            <img src="../../guestbook.png" alt="" />
+            <img src="../../guestbook.png" alt="guestbook icon" />
             <h1>Sign in to your account</h1>
             <p>
               Or{' '}
-              <span className={style.linkTo} onClick={userStatus}>
+              <span
+                className={style.linkTo}
+                onClick={userStatus}
+                data-testid="createUser"
+              >
                 create an account
               </span>
             </p>
             <form onSubmit={handleLogin} className={style.userLogin}>
               <input
                 id="email"
+                data-testid="loginEmail"
                 name="email"
                 type="email"
                 placeholder="E-Mail"
@@ -56,6 +63,7 @@ export default function Login() {
               />
               <input
                 id="password"
+                data-testid="loginPassword"
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -70,17 +78,22 @@ export default function Login() {
           </>
         ) : (
           <>
-            <img src="../../guestbook.png" alt="" />
+            <img src="../../guestbook.png" alt="guestbook icon" />
             <h1>Sign up for an account</h1>
             <p>
               Or{' '}
-              <span className={style.linkTo} onClick={userStatus}>
+              <span
+                className={style.linkTo}
+                onClick={userStatus}
+                data-testid="signInUser"
+              >
                 sign in to your account
               </span>
             </p>
             <form onSubmit={handleSignUp} className={style.userLogin}>
               <input
                 id="email"
+                data-testid="signUpEmail"
                 name="email"
                 type="email"
                 placeholder="E-Mail"
@@ -90,6 +103,7 @@ export default function Login() {
               />
               <input
                 id="password"
+                data-testid="signUpPassword"
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -97,7 +111,7 @@ export default function Login() {
                 value={formState.password}
                 onChange={handleFormChange}
               />
-              <button type="submit" aria-label="Sign Up">
+              <button type="submit" data-testid="Sign Up">
                 Sign Up
               </button>
             </form>
