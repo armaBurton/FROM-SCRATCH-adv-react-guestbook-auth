@@ -92,7 +92,7 @@ afterAll(() => server.close());
 describe('Login.jsx', () => {
   it('should be a passing test', () => {});
 
-  test('it should redirect an unregistered user from / to /login', async () => {
+  test('it should redirect an unregistered user from / to /login, sign up a new user, and make a post', async () => {
     render(
       <MemoryRouter>
         <GuestbookProvider>
