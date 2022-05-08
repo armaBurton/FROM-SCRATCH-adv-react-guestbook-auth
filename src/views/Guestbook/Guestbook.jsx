@@ -21,24 +21,28 @@ export default function Guestbook({ children, ...rest }) {
   console.log(entries);
 
   async function handleSubmit(e) {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    if (textState === '') {
-      return;
-    } else {
-      console.log(user.id, textState);
+      if (textState === '') {
+        return;
+      } else {
+        console.log(user.id, textState);
 
-      const guestbookObj = {
-        userId: user.id,
-        content: textState,
-      };
+        const guestbookObj = {
+          userId: user.id,
+          content: textState,
+        };
 
-      await createEntry(guestbookObj);
-      await getEntries()
-        .then(setEntries)
-        .catch(console.error)
-        .finally(() => setLoading(false));
-      setTextState('');
+        await createEntry(guestbookObj);
+        await getEntries()
+          .then(setEntries)
+          .catch(console.error)
+          .finally(() => setLoading(false));
+        setTextState('');
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 
