@@ -1,11 +1,22 @@
-import { render, screen } from '@testing-library/react';
+import {
+  getByText,
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  waitFor,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
+import { getEntries } from '../../services/entries';
 import Login from './Login';
 import userId from '../../assets/user';
-import { GuestbookProvider } from '../../context/GuestbookProvider';
+import { userPosts } from '../../assets/posts';
+import {
+  GuestbookProvider,
+  useGuestbook,
+} from '../../context/GuestbookProvider';
 import App from '../../App';
 
 jest.mock('../../services/user.js', () => {
@@ -45,6 +56,26 @@ jest.mock('../../services/user.js', () => {
       };
       return userObj;
     },
+    getEntries: function () {
+      return [
+        {
+          id: 424,
+          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+          content: 'Boogers are the fruit of your nose.',
+          created_at: '2022-05-08T22:43:30.185359+00:00',
+        },
+      ];
+    },
+    createEntry: function () {
+      return [
+        {
+          id: 424,
+          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+          content: 'Boogers are the fruit of your nose.',
+          created_at: '2022-05-08T22:43:30.185359+00:00',
+        },
+      ];
+    },
   };
 });
 
@@ -60,8 +91,6 @@ afterAll(() => server.close());
 
 describe('Login.jsx', () => {
   it('should be a passing test', () => {});
-
-  console.log(userId);
 
   test('it should redirect an unregistered user from / to /login', async () => {
     render(
@@ -83,5 +112,12 @@ describe('Login.jsx', () => {
     link = screen.getByTestId(/sign up/i);
     userEvent.click(link);
     await screen.findByText(/booger@eater.yum/i);
+    screen.getByText(/guestbook/i);
+    link = screen.getByText(/add entry/i);
+    let entry = screen.getByTestId(/content/i);
+    userEvent.type(entry, 'Boogers are the fruit of your nose.');
+    userEvent.click(link);
+    await waitForElementToBeRemoved(() => screen.getByText(/loading entries/i));
+    await screen.findByText(/boogers are the fruit of your nose/i);
   });
 });

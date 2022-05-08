@@ -18,6 +18,8 @@ export default function Guestbook({ children, ...rest }) {
       .finally(() => setLoading(false));
   }, []);
 
+  console.log(entries);
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -54,6 +56,7 @@ export default function Guestbook({ children, ...rest }) {
           <textarea
             name="content"
             id="content"
+            data-testid="content"
             placeholder="Please leave a message"
             cols="60"
             rows="3"
