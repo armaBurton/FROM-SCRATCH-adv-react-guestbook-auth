@@ -1,0 +1,21 @@
+.entryCard {
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 420px;
+}
+
+.entryCard:hover {
+  box-shadow: 0 0 20px yellow;
+}
+
+.content {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+}
+
+.lineItems {
+  margin-top: 30px;
+  font-size: 0.75rem;
+}
