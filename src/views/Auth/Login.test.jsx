@@ -47,47 +47,47 @@ jest.mock('../../services/user.js', () => {
       };
       return userObj;
     },
-    getEntries: function () {
-      return [
-        {
-          id: 783,
-          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
-          content: 'adawewae',
-          created_at: '2022-05-16T23:46:46.297443+00:00',
-        },
-        {
-          id: 424,
-          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
-          content:
-            'Keep your nose to the grindstone. It sharpens your boogers.',
-          created_at: '2022-05-08T22:43:30.185359+00:00',
-        },
-        {
-          id: 423,
-          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
-          content:
-            "I am not a friend of eSports. It's the same with professional wrestling - it's for booger eaters.",
-          created_at: '2022-05-08T22:41:47.998341+00:00',
-        },
-        {
-          id: 422,
-          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
-          content:
-            "It's not how you pick your nose, it's where you put that booger that counts.",
-          created_at: '2022-05-08T22:40:58.444568+00:00',
-        },
-      ];
-    },
-    createEntry: function () {
-      return [
-        {
-          id: 424,
-          guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
-          content: 'Boogers are the fruit of your nose.',
-          created_at: '2022-03-08T22:43:30.185359+00:00',
-        },
-      ];
-    },
+    // getEntries: function () {
+    //   return [
+    //     {
+    //       id: 783,
+    //       guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+    //       content: 'adawewae',
+    //       created_at: '2022-05-16T23:46:46.297443+00:00',
+    //     },
+    //     {
+    //       id: 424,
+    //       guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+    //       content:
+    //         'Keep your nose to the grindstone. It sharpens your boogers.',
+    //       created_at: '2022-05-08T22:43:30.185359+00:00',
+    //     },
+    //     {
+    //       id: 423,
+    //       guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+    //       content:
+    //         "I am not a friend of eSports. It's the same with professional wrestling - it's for booger eaters.",
+    //       created_at: '2022-05-08T22:41:47.998341+00:00',
+    //     },
+    //     {
+    //       id: 422,
+    //       guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+    //       content:
+    //         "It's not how you pick your nose, it's where you put that booger that counts.",
+    //       created_at: '2022-05-08T22:40:58.444568+00:00',
+    //     },
+    //   ];
+    // },
+    // createEntry: function () {
+    //   return [
+    //     {
+    //       id: 424,
+    //       guest_id: '51954f56-08db-400c-ae7f-538b2bc23b4e',
+    //       content: 'Boogers are the fruit of your nose.',
+    //       created_at: '2022-03-08T22:43:30.185359+00:00',
+    //     },
+    //   ];
+    // },
   };
 });
 jest.mock('../../services/entries.js', () => {
@@ -185,27 +185,34 @@ describe('Login.jsx', () => {
       </MemoryRouter>
     );
 
+    //Detect Page
     await screen.findByText(/sign in to your account/i);
-    let link = screen.getByTestId(/createUser/i);
+
+    //Sign up user
+    let link = screen.getByText(/create an account/i);
     userEvent.click(link);
     await screen.findByText(/sign up for an account/i);
-    let email = screen.getByTestId(/signUpEmail/i);
-    let password = screen.getByTestId(/signUpPassword/i);
+    let email = screen.getByRole('textbox', { placeholder: /e-mail/i });
+    let password = screen.getByRole('textbox', { placeholder: /password/i });
     userEvent.type(email, 'booger@eater.yum');
     userEvent.type(password, 'password');
-    link = screen.getByTestId(/sign up/i);
+    link = screen.getByRole('button', { name: /sign up/i });
     userEvent.click(link);
+
+    //Detect page chaneg
     await screen.findByText(/signed in as booger@eater.yum/i);
     screen.getByText(/guestbook/i);
-    // await waitForElementToBeRemoved(/loading entries/i);
-    // await screen.findByText(/i eat all the hotdogs/i);
-    // screen.getByText(/random entry/i);
-    // screen.getByText(/boogers are the fruit/i);
+
+    //Search for list of posts
+    await screen.findByText(/your nose to the/i);
+    screen.getByText(/you put that booger/i);
+    screen.getByText(/It sharpens your boogers/i);
     link = screen.getByText(/add entry/i);
-    let entry = screen.getByTestId(/content/i);
+    let entry = screen.getByRole('textbox', {
+      placeholder: /please leave a message/i,
+    });
     userEvent.type(entry, 'Boogers are the fruit of your nose.');
     userEvent.click(link);
-    await waitForElementToBeRemoved(() => screen.getByText(/loading entries/i));
     screen.getByText(/boogers are the fruit of your nose/i);
     screen.getByText(/pick your nose/i);
   });

@@ -10,12 +10,20 @@ export default function Guestbook({ children, ...rest }) {
   const [guestObj, setGuestObj] = useState({});
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
 
-    getEntries()
-      .then(setEntries)
-      .catch(console.error)
-      .finally(() => setLoading(false));
+    // getEntries()
+    //   .then(setEntries)
+    //   .catch(console.error)
+    //   .finally(() => setLoading(false));
+    async function getList() {
+      setLoading(true);
+      const list = await getEntries();
+      setEntries(list);
+      setLoading(false);
+    }
+
+    getList();
   }, []);
 
   console.log(entries);
