@@ -58,9 +58,9 @@ export default function App() {
             <Route path="/home">
               <Home />
             </Route>
-            <Route path="/">
+            <PrivateRoute path="/">
               <Redirect to="/login" />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </section>
       </Router>
